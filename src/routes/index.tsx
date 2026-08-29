@@ -95,7 +95,7 @@ function Index() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#menu"
-                  className="inline-flex h-13 items-center rounded-sm bg-brick px-8 py-4 text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground transition-opacity hover:opacity-90"
+                  className="inline-flex items-center rounded-sm bg-brick px-8 py-4 text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground transition-opacity hover:opacity-90"
                 >
                   Order now
                 </a>
