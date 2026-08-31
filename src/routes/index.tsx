@@ -282,23 +282,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Corporate Gifts Section */}
-        <section className="relative w-full py-16 sm:py-24 flex flex-col justify-center items-center text-center">
-          <div className="mx-auto max-w-[1400px] px-4">
-            <h2 className="display-xl text-[clamp(3rem,8vw,6rem)] text-[#4D2312] uppercase tracking-tight relative z-20">
-              CORPORATE GIFTS
-            </h2>
-          </div>
-          <div className="mt-12 flex justify-end w-full">
-            <img 
-              ref={corpRef}
-              src="/danbro/pour/corp.png" 
-              alt="Corporate Gifts" 
-              className="w-[80%] max-w-[800px] h-auto object-contain"
-              style={{ opacity: 0, transform: 'translateX(200px)' }}
-            />
-          </div>
-        </section>
 
         {/* App promo */}
         <section className="bg-white text-[#4D2312] overflow-hidden">
@@ -333,6 +316,24 @@ function Index() {
                 className="absolute top-[-50px] left-[20%] w-[60%] h-auto object-cover z-20 animate-float-slow"
               />
             </div>
+          </div>
+        </section>
+
+        {/* Corporate Gifts Section */}
+        <section className="relative w-full py-16 sm:py-24 flex flex-col justify-center items-center text-center">
+          <div className="mx-auto max-w-[1400px] px-4">
+            <h2 className="display-xl text-[clamp(3rem,8vw,6rem)] text-[#4D2312] uppercase tracking-tight relative z-20">
+              CORPORATE GIFTS
+            </h2>
+          </div>
+          <div className="mt-12 flex justify-end w-full">
+            <img 
+              ref={corpRef}
+              src="/danbro/pour/corp.png" 
+              alt="Corporate Gifts" 
+              className="w-[80%] max-w-[800px] h-auto object-contain"
+              style={{ opacity: 0, transform: 'translateX(200px)' }}
+            />
           </div>
         </section>
 
