@@ -1,66 +1,58 @@
 import { Menu, MapPin, User, ShoppingBag } from "lucide-react";
 
-const navLinks = ["Order", "Menu", "Catering", "Rewards", "Locations", "Gift Cards"];
+const navLinks = [
+  { name: "Menu", active: true },
+  { name: "Catering", active: false },
+  { name: "Rewards", active: false },
+  { name: "Our Values", active: false },
+  { name: "Nutrition", active: false }
+];
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-background">
-      <div className="bg-charcoal text-charcoal-foreground">
-        <div className="mx-auto flex h-9 max-w-[1400px] items-center justify-between px-4 text-[11px] font-semibold uppercase tracking-[0.18em]">
-          <span>Free delivery on orders over $20 in the app</span>
-          <div className="hidden gap-6 sm:flex">
-            <a href="#rewards" className="hover:text-accent">
-              Rewards
-            </a>
-            <a href="#locations" className="hover:text-accent">
-              Find a restaurant
-            </a>
-          </div>
-        </div>
-      </div>
+    <header className="sticky top-0 z-50 bg-white">
 
-      <div className="border-b border-border">
-        <div className="mx-auto flex h-[68px] max-w-[1400px] items-center gap-4 px-4">
+
+      <div className="border-b border-[#E1E1E1]">
+        <div className="mx-auto flex h-[76px] max-w-[1400px] items-center gap-4 sm:gap-8 px-4">
           <button
             aria-label="Open menu"
-            className="flex h-10 w-10 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-sm text-[#4D2312] transition-colors hover:bg-secondary lg:hidden"
           >
             <Menu className="h-6 w-6" />
           </button>
 
-          <a href="/" className="flex items-center gap-3">
-            <span className="ph h-11 w-11 rounded-full">Logo</span>
-            <span className="display-xl text-xl text-brick sm:text-2xl">Fresh Fire Grill</span>
+          <a href="/danbro/" className="flex items-center shrink-0">
+            <img src="/danbro/danbro/logo.png" alt="Danbro Logo" className="h-[100px] w-[100px] sm:h-[120px] sm:w-[120px] object-contain rounded-full" />
           </a>
 
-          <nav className="ml-8 hidden items-center gap-7 lg:flex">
+          <nav className="hidden h-full items-center gap-7 lg:flex">
             {navLinks.map((link) => (
               <a
-                key={link}
+                key={link.name}
                 href="#menu"
-                className="text-[13px] font-bold uppercase tracking-[0.12em] text-foreground transition-colors hover:text-brick"
+                className={`relative flex h-full items-center pt-1 text-[17px] font-bold uppercase tracking-[0.02em] transition-colors hover:text-[#93281E] ${
+                  link.active ? "text-[#93281E]" : "text-[#4D2312]"
+                }`}
               >
-                {link}
+                {link.name}
+                {link.active && (
+                  <span className="absolute bottom-0 left-0 h-[4px] w-full bg-[#93281E]"></span>
+                )}
               </a>
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2">
-            <button className="hidden items-center gap-2 rounded-sm px-3 py-2 text-[13px] font-bold uppercase tracking-[0.12em] transition-colors hover:bg-secondary md:flex">
-              <MapPin className="h-4 w-4" /> Locations
-            </button>
-            <button className="flex items-center gap-2 rounded-sm px-3 py-2 text-[13px] font-bold uppercase tracking-[0.12em] transition-colors hover:bg-secondary">
-              <User className="h-4 w-4" />
-              <span className="hidden sm:inline">Sign in</span>
-            </button>
-            <button className="flex h-10 w-10 items-center justify-center rounded-sm transition-colors hover:bg-secondary">
-              <ShoppingBag className="h-5 w-5" />
-            </button>
-            <a
-              href="#menu"
-              className="ml-1 inline-flex h-11 items-center rounded-sm bg-brick px-5 text-[13px] font-bold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Order now
+          <div className="ml-auto flex items-center gap-4 sm:gap-6 md:gap-8 text-[#4D2312]">
+            <a href="#locations" className="hidden items-center gap-2 text-[14px] font-bold uppercase tracking-[0.06em] hover:text-[#93281E] transition-colors md:flex">
+              <MapPin className="h-5 w-5" strokeWidth={2.5} /> Find a DANBRO
+            </a>
+            <a href="#signin" className="flex items-center gap-2 text-[14px] font-bold uppercase tracking-[0.06em] hover:text-[#93281E] transition-colors">
+              <User className="h-5 w-5" strokeWidth={2.5} />
+              <span className="hidden sm:inline">Sign In / Join</span>
+            </a>
+            <a href="#cart" className="flex items-center hover:text-[#93281E] transition-colors">
+              <ShoppingBag className="h-[22px] w-[22px]" strokeWidth={2} />
             </a>
           </div>
         </div>
