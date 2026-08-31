@@ -266,3 +266,8 @@
 @utility animate-slide-x {
   animation: slide-x 4s ease-in-out infinite;
 }
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
