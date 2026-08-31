@@ -27,11 +27,11 @@ export const Preloader = () => {
 
   return (
     <div 
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#F9F4EB] transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#d9d6d7] transition-opacity duration-500 ${
         isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      <div className="absolute bottom-0 right-0 pointer-events-none">
+      <div className="flex flex-col items-center justify-center pointer-events-none">
         <video 
           src="/danbro/pour/loader.mp4" 
           autoPlay 
