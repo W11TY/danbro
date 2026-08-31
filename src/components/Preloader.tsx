@@ -31,14 +31,14 @@ export const Preloader = () => {
         isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      <div className="flex flex-col items-center justify-center pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <video 
           src="/danbro/pour/loader.mp4" 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="w-48 sm:w-64 h-auto animate-pulse"
+          className="w-full h-full object-cover animate-pulse"
         />
       </div>
     </div>
