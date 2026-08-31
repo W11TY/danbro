@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ArrowRight, Leaf, Flame, Clock, MapPin, X, Navigation } from "lucide-react";
+import { Preloader } from "@/components/Preloader";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -109,6 +110,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Preloader />
       <Header />
 
       <main>
@@ -116,7 +118,7 @@ function Index() {
         <section className="relative bg-charcoal text-white overflow-hidden">
           <div className="absolute inset-0 h-full w-full">
             <video 
-              src="/danbro/danbro/herobg.mp4" 
+              src="/danbro/herobg.mp4" 
               autoPlay 
               loop 
               muted 
@@ -194,7 +196,7 @@ function Index() {
                     className="animate-float aspect-[4/3] w-full max-w-[320px] rounded-sm bg-transparent border-0 flex items-center justify-center drop-shadow-md transition-all duration-300 group-hover:drop-shadow-2xl"
                     style={{ animationDelay: `${index * 0.15}s` }}
                   >
-                    <img src={`/${meal.image || meal.name.toLowerCase().replace(/ /g, '-') + '.png'}`} alt={meal.name} className={`max-h-full max-w-full object-contain ${meal.landscape ? '-rotate-90 scale-125' : ''}`} onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.innerText = meal.name + ' image'; }} />
+                    <img src={`/danbro/${meal.image || meal.name.toLowerCase().replace(/ /g, '-') + '.png'}`} alt={meal.name} className={`max-h-full max-w-full object-contain ${meal.landscape ? '-rotate-90 scale-125' : ''}`} onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.innerText = meal.name + ' image'; }} />
                   </div>
                 </div>
                 
@@ -222,7 +224,7 @@ function Index() {
           <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2 relative">
             <img 
               ref={pizzaRef}
-              src="/danbro/danbro/pizza.png" 
+              src="/danbro/pizza.png" 
               alt="Feature" 
               className="rounded-sm animate-float-only relative z-10" 
             />
@@ -261,14 +263,14 @@ function Index() {
         <section className="relative w-full py-16 sm:py-24 mt-48 sm:mt-64 mb-72 sm:mb-96 flex flex-col justify-center items-center text-center">
           <div className="absolute bottom-[-150px] left-[-40%] z-10">
             <img 
-              src="/danbro/danbro/pour/grab.png" 
+              src="/danbro/pour/grab.png" 
               alt="Grab" 
               className="w-[300px] sm:w-[450px] h-auto object-contain animate-slide-x"
             />
           </div>
           <div className="absolute top-1/2 -translate-y-1/2 right-0 mt-10 z-10">
             <img 
-              src="/danbro/danbro/pour/pour.png" 
+              src="/danbro/pour/pour.png" 
               alt="Dan Brew Pour" 
               className="w-[250px] h-auto object-contain animate-float-only"
             />
@@ -290,7 +292,7 @@ function Index() {
           <div className="mt-12 flex justify-end w-full">
             <img 
               ref={corpRef}
-              src="/danbro/danbro/pour/corp.png" 
+              src="/danbro/pour/corp.png" 
               alt="Corporate Gifts" 
               className="w-[80%] max-w-[800px] h-auto object-contain"
               style={{ opacity: 0, transform: 'translateX(200px)' }}
@@ -321,12 +323,12 @@ function Index() {
             </div>
             <div className="relative w-[calc(100%+2rem)] -ml-4 sm:w-[calc(100%+4rem)] sm:-ml-8 lg:w-[calc(50vw-1.25rem)] lg:ml-0 lg:mr-0 mt-10 lg:mt-0 order-1 lg:order-2">
               <img 
-                src="/danbro/danbro/fresh.png" 
+                src="/danbro/fresh.png" 
                 alt="Fresh" 
                 className="relative z-10 w-full h-auto object-cover mt-[100px] block"
               />
               <img 
-                src="/danbro/danbro/hotkitchen.png" 
+                src="/danbro/hotkitchen.png" 
                 alt="Hot Kitchen" 
                 className="absolute top-[-50px] left-[20%] w-[60%] h-auto object-cover z-20 animate-float-slow"
               />
@@ -339,10 +341,10 @@ function Index() {
         {/* Locations Overhaul */}
         <section id="locations" className="relative bg-[#F9F4EB] py-16 sm:py-32 overflow-hidden text-[#5A1921] min-h-screen">
           {/* Decorative bushes */}
-          <img src="/danbro/danbro/find/bushes.png" alt="Bushes" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[250%] max-w-none md:w-full md:left-0 md:translate-x-0 h-auto object-cover object-bottom pointer-events-none z-0 opacity-100" />
+          <img src="/danbro/find/bushes.png" alt="Bushes" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[250%] max-w-none md:w-full md:left-0 md:translate-x-0 h-auto object-cover object-bottom pointer-events-none z-0 opacity-100" />
 
           {/* Sign placeholder */}
-          <img src="/danbro/danbro/sign-mockup.png" alt="" className="absolute top-[50%] left-0 w-32 object-contain z-30" />
+          <img src="/danbro/sign-mockup.png" alt="" className="absolute top-[50%] left-0 w-32 object-contain z-30" />
 
           <div className="relative mx-auto max-w-[1400px] px-4 lg:px-8 z-10 flex flex-col items-center">
             {/* Top section: Text + Search and Path Illustration */}
@@ -377,7 +379,7 @@ function Index() {
 
               {/* Right Content - Path Illustration */}
               <div className="relative w-full lg:w-[60%] lg:absolute lg:right-[10%] lg:top-[-10%] aspect-square lg:aspect-auto h-full pointer-events-none z-0">
-                <img src="/danbro/danbro/find/store.png" alt="Danbro Store Map Illustration" className="w-full h-full object-contain object-right-top" />
+                <img src="/danbro/find/store.png" alt="Danbro Store Map Illustration" className="w-full h-full object-contain object-right-top" />
               </div>
             </div>
 
@@ -433,9 +435,9 @@ function Index() {
 
                 {/* Column 3 - Map */}
                 <div className="relative aspect-[4/3] lg:aspect-auto rounded-2xl overflow-visible lg:overflow-hidden border-4 border-[#F2EBDC] shadow-inner bg-[#EAE2CE]">
-                  <img src="/danbro/danbro/find/map.png" alt="Map" className="w-full h-full object-cover rounded-xl" />
+                  <img src="/danbro/find/map.png" alt="Map" className="w-full h-full object-cover rounded-xl" />
                   {/* Sticky note placeholder */}
-                  <img src="/danbro/danbro/sticky-note.png" alt="Sticky Note" className="absolute -right-4 lg:-right-8 top-[10%] lg:top-[20%] w-24 sm:w-32 object-contain drop-shadow-lg rotate-6 z-20" />
+                  <img src="/danbro/sticky-note.png" alt="Sticky Note" className="absolute -right-4 lg:-right-8 top-[10%] lg:top-[20%] w-24 sm:w-32 object-contain drop-shadow-lg rotate-6 z-20" />
                 </div>
 
               </div>
@@ -447,18 +449,6 @@ function Index() {
       </main>
 
       {false && <Footer />}
-      <div className="fixed bottom-0 right-0 z-50 pointer-events-none">
-        {/* Note: iOS Safari doesn't support WebM transparency. Provide an HEVC .mov for iOS. */}
-        <video 
-          src="/danbro/danbro/brodan.webm" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          style={{ backgroundColor: "transparent" }}
-          className="w-32 sm:w-44 h-auto"
-        />
-      </div>
     </div>
   );
 }

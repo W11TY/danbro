@@ -26,7 +26,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-white text-black font-sans">
       <div className="absolute inset-0 h-full w-full">
         <video 
-          src="/danbro/danbro/workers.mp4" 
+          src="/danbro/workers.mp4" 
           autoPlay 
           loop 
           muted 

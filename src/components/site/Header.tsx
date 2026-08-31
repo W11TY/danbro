@@ -23,7 +23,7 @@ export function Header() {
           </button>
 
           <a href="/danbro/" className="flex items-center shrink-0">
-            <img src="/danbro/danbro/logo.png" alt="Danbro Logo" className="h-[100px] w-[100px] sm:h-[120px] sm:w-[120px] object-contain rounded-full" />
+            <img src="/danbro/logo.png" alt="Danbro Logo" className="h-[100px] w-[100px] sm:h-[120px] sm:w-[120px] object-contain rounded-full" />
           </a>
 
           <nav className="hidden h-full items-center gap-7 lg:flex">
