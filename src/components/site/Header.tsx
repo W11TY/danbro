@@ -24,7 +24,7 @@ export function Header() {
         {/* Center Logo */}
         <div className="absolute left-1/2 top-0 -translate-x-1/2 flex justify-center z-50">
           <Link to="/" className="flex items-center p-1.5 mt-2 transition-transform hover:scale-105">
-            <img src="/danbro/logo.png" alt="Danbro Logo" className="h-[65px] w-[65px] sm:h-[75px] sm:w-[75px] object-contain brightness-0 invert" />
+            <img src="/danbro/logo.webp" alt="Danbro Logo" className="h-[65px] w-[65px] sm:h-[75px] sm:w-[75px] object-contain brightness-0 invert" />
           </Link>
         </div>
 

@@ -6,7 +6,7 @@ export const Preloader = () => {
 
   useEffect(() => {
     // Wait for minimum time to show animation, and ensure window is loaded
-    const minTimePromise = new Promise(resolve => setTimeout(resolve, 2500));
+    const minTimePromise = new Promise(resolve => setTimeout(resolve, 800));
     
     const loadPromise = new Promise(resolve => {
       if (document.readyState === 'complete') {

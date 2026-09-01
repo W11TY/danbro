@@ -28,15 +28,15 @@ export const Route = createFileRoute("/")({
 });
 
 const mealTypes = [
-  { name: "Cake", tag: null, note: "Serves 4-6 people", image: "cake.png" },
+  { name: "Cake", tag: null, note: "Serves 4-6 people", image: "cake.webp" },
   { name: "Cookies", tag: null, note: null },
   { name: "Baklawa", tag: null, note: null },
-  { name: "Chocolates", tag: null, note: null, image: "chocolate.png", landscape: true },
-  { name: "Danbrew", tag: null, note: null, image: "danbrew.png" },
-  { name: "Desserts", tag: null, note: null, image: "desserts.png" },
-  { name: "Gifts", tag: null, note: null, image: "gifts.png" },
-  { name: "Hot Kitchen", tag: null, note: null, image: "hotkitchen.png" },
-  { name: "Tea Time Cake", tag: null, note: null, image: "teatimecake.png" },
+  { name: "Chocolates", tag: null, note: null, image: "chocolate.webp", landscape: true },
+  { name: "Danbrew", tag: null, note: null, image: "danbrew.webp" },
+  { name: "Desserts", tag: null, note: null, image: "desserts.webp" },
+  { name: "Gifts", tag: null, note: null, image: "gifts.webp" },
+  { name: "Hot Kitchen", tag: null, note: null, image: "hotkitchen.webp" },
+  { name: "Tea Time Cake", tag: null, note: null, image: "teatimecake.webp" },
 ];
 
 
@@ -106,6 +106,7 @@ function Index() {
               loop 
               muted 
               playsInline 
+              preload="none"
               className="h-full w-full object-cover"
             />
           </div>
@@ -182,7 +183,7 @@ function Index() {
                     className="animate-float aspect-[4/3] w-full max-w-[320px] rounded-sm bg-transparent border-0 flex items-center justify-center drop-shadow-md transition-all duration-300 group-hover:drop-shadow-2xl"
                     style={{ animationDelay: `${index * 0.15}s` }}
                   >
-                    <img src={`/danbro/${meal.image || meal.name.toLowerCase().replace(/ /g, '-') + '.png'}`} alt={meal.name} className={`max-h-full max-w-full object-contain ${meal.landscape ? '-rotate-90 scale-125' : ''}`} onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.innerText = meal.name + ' image'; }} />
+                    <img src={`/danbro/${meal.image ? meal.image.replace('.png', '.webp') : meal.name.toLowerCase().replace(/ /g, '-') + '.webp'}`} alt={meal.name} loading="lazy" className={`max-h-full max-w-full object-contain ${meal.landscape ? '-rotate-90 scale-125' : ''}`} onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.innerText = meal.name + ' image'; }} />
                   </div>
                 </div>
                 
@@ -210,8 +211,9 @@ function Index() {
           <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2 relative">
             <img 
               ref={pizzaRef}
-              src="/danbro/pizza.png" 
+              src="/danbro/pizza.webp" 
               alt="Feature" 
+              loading="lazy"
               className="rounded-sm animate-float-only relative z-10" 
             />
             <div ref={textWrapperRef} className="relative z-0">
@@ -238,15 +240,17 @@ function Index() {
         <section className="relative w-full py-16 sm:py-24 mt-48 sm:mt-64 mb-72 sm:mb-96 flex flex-col justify-center items-center text-center">
           <div className="absolute bottom-[-150px] left-[-40%] z-10">
             <img 
-              src="/danbro/pour/grab.png" 
+              src="/danbro/pour/grab.webp" 
               alt="Grab" 
+              loading="lazy"
               className="w-[300px] sm:w-[450px] h-auto object-contain animate-slide-x"
             />
           </div>
           <div className="absolute top-1/2 -translate-y-1/2 right-0 mt-10 z-10">
             <img 
-              src="/danbro/pour/pour.png" 
+              src="/danbro/pour/pour.webp" 
               alt="Dan Brew Pour" 
+              loading="lazy"
               className="w-[250px] h-auto object-contain animate-float-only"
             />
           </div>
@@ -288,13 +292,15 @@ function Index() {
             </div>
             <div className="relative w-[calc(100%+2rem)] -ml-4 sm:w-[calc(100%+4rem)] sm:-ml-8 lg:w-[calc(50vw-1.25rem)] lg:ml-0 lg:mr-0 mt-10 lg:mt-0 order-1 lg:order-2">
               <img 
-                src="/danbro/fresh.png" 
+                src="/danbro/fresh.webp" 
                 alt="Fresh" 
+                loading="lazy"
                 className="relative z-10 w-full h-auto object-cover mt-[100px] block"
               />
               <img 
-                src="/danbro/hotkitchen.png" 
+                src="/danbro/hotkitchen.webp" 
                 alt="Hot Kitchen" 
+                loading="lazy"
                 className="absolute top-[-50px] left-[20%] w-[60%] h-auto object-cover z-20 animate-float-slow"
               />
             </div>
@@ -311,8 +317,9 @@ function Index() {
           <div className="mt-12 flex justify-end w-full">
             <img 
               ref={corpRef}
-              src="/danbro/pour/corp.png" 
+              src="/danbro/pour/corp.webp" 
               alt="Corporate Gifts" 
+              loading="lazy"
               className="w-[80%] max-w-[800px] h-auto object-contain"
               style={{ opacity: 0, transform: 'translateX(200px)' }}
             />

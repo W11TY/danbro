@@ -18,7 +18,7 @@ function CategoryPage() {
   const { categoryId } = Route.useParams();
   
   const title = categoryId.split('-').join(' ').toUpperCase();
-  const imageSlug = categoryId.replace(/-/g, ''); // For e.g. "tea-time-cake" -> "teatimecake.png"
+  const imageSlug = categoryId.replace(/-/g, ''); // For e.g. "tea-time-cake" -> "teatimecake.webp"
 
   return (
     <div className="min-h-screen bg-white">
@@ -56,10 +56,11 @@ function CategoryPage() {
             >
               <div className="relative w-full aspect-[4/3] flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-2">
                 <img
-                  src={`/danbro/${imageSlug}.png`}
+                  src={`/danbro/${imageSlug}.webp`}
                   alt={item.name}
+                  loading="lazy"
                   className="w-[90%] max-h-full object-contain drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl group-hover:scale-105"
-                  onError={(e) => { e.currentTarget.src = "/danbro/pizza.png"; }}
+                  onError={(e) => { e.currentTarget.src = "/danbro/pizza.webp"; }}
                 />
                 {item.isNew && (
                   <div className="absolute top-[10%] right-[10%] w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-[#FFE400] font-black text-[12px] sm:text-[14px] transform rotate-12 z-10 pointer-events-none drop-shadow-md">
@@ -93,14 +94,16 @@ function CategoryPage() {
         <section className="relative w-full flex justify-end items-center overflow-hidden max-w-[1400px] mx-auto min-h-[350px] sm:min-h-[550px] mt-8">
           {/* Animated Peel */}
           <img
-            src="/danbro/pour/peel.png"
+            src="/danbro/pour/peel.webp"
             alt="Peel"
+            loading="lazy"
             className="w-[70%] max-w-[750px] h-auto object-contain z-30 drop-shadow-2xl absolute left-[-5%] sm:left-[0%] lg:left-[5%] top-[55%] sm:top-[60%] mt-[60px] transform -translate-y-1/2 pointer-events-none animate-slide-peel"
           />
           {/* Stable Oven */}
           <img
-            src="/danbro/pour/oven.png"
+            src="/danbro/pour/oven.webp"
             alt="Oven"
+            loading="lazy"
             className="w-[75%] max-w-[800px] h-auto object-contain drop-shadow-xl z-20 mr-[-10%] sm:mr-[5%]"
           />
         </section>

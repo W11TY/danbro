@@ -41,10 +41,10 @@ function ProductPage() {
           {/* Product Image */}
           <div className="flex items-center justify-center">
             <img
-              src={`/danbro/${imageSlug}.png`}
+              src={`/danbro/${imageSlug}.webp`}
               alt={product.name}
               className="w-full max-w-[420px] object-contain drop-shadow-2xl"
-              onError={(e) => { e.currentTarget.src = "/danbro/pizza.png"; }}
+              onError={(e) => { e.currentTarget.src = "/danbro/pizza.webp"; }}
             />
           </div>
 
