@@ -38,7 +38,7 @@ export const Preloader = () => {
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover animate-pulse"
+          className="w-full h-full object-cover"
         />
       </div>
     </div>

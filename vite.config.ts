@@ -7,7 +7,9 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  base: "/danbro/",
+  vite: {
+    base: "/danbro/",
+  },
   tanstackStart: {
     ssr: false,
   },

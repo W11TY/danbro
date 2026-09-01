@@ -1,14 +1,14 @@
-import { useEffect, useRef } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { ArrowRight, Leaf, Flame, Clock, MapPin, X, Navigation } from "lucide-react";
+import { ArrowRight, MapPin, X, Navigation } from "lucide-react";
 import { Preloader } from "@/components/Preloader";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DANBRO | Burritos, Bowls, Tacos & Quesadillas" },
+      { title: "Danbro" },
       {
         name: "description",
         content:
@@ -40,24 +40,6 @@ const mealTypes = [
 ];
 
 
-const promises = [
-  {
-    icon: Leaf,
-    title: "Real ingredients",
-    copy: "53 whole ingredients, no added colors, flavors or preservatives on the line.",
-  },
-  {
-    icon: Flame,
-    title: "Cooked by hand",
-    copy: "Meat marinated and grilled in-house every morning. Guac mashed all day long.",
-  },
-  {
-    icon: Clock,
-    title: "Ready when you are",
-    copy: "",
-  },
-];
-
 function Index() {
   const pizzaRef = useRef<HTMLImageElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -66,6 +48,7 @@ function Index() {
   const promoWrapperRef = useRef<HTMLDivElement>(null);
   const hotKitchenRef = useRef<HTMLImageElement>(null);
   const corpRef = useRef<HTMLImageElement>(null);
+  const [rewardsOpen, setRewardsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,13 +92,13 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Preloader />
       <Header />
 
       <main>
         {/* Hero */}
-        <section className="relative bg-charcoal text-white overflow-hidden">
+        <section className="relative w-full h-[85vh] min-h-[600px] overflow-hidden rounded-b-[40px] bg-[#E33423] z-10 shadow-lg">
           <div className="absolute inset-0 h-full w-full">
             <video 
               src="/danbro/herobg.mp4" 
@@ -123,75 +106,78 @@ function Index() {
               loop 
               muted 
               playsInline 
-              className="h-full w-full object-cover opacity-90"
+              className="h-full w-full object-cover"
             />
-            {/* dark gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-black/20"></div>
           </div>
-          <div className="relative mx-auto flex min-h-[560px] max-w-[1400px] flex-col items-center justify-center px-4 py-20 text-center lg:min-h-[660px]">
-            <h1 className="display-xl mt-8 flex flex-col text-[clamp(3.5rem,10vw,7.5rem)] leading-[0.9] text-white">
-              <span className="text-[clamp(1.75rem,6vw,4rem)] text-white/95">DANBRO HONEY</span>
-              CHICKEN
-            </h1>
-            <p className="mt-5 text-[13px] font-bold uppercase tracking-[0.2em] text-white">
-              DANBRO HEAT WITH A TOUCH OF SWEET
-            </p>
-            <p className="mt-4 max-w-[450px] text-[15px] font-medium leading-relaxed text-white">
-              Freshly grilled chicken marinated with DANBRO peppers and a touch of pure honey is back to kick off summer.
-            </p>
-            <div className="mt-6 flex">
-              <a
-                href="#menu"
-                className="inline-flex items-center rounded-sm bg-[#93281E] px-8 py-3.5 text-[13px] font-bold uppercase tracking-[0.16em] text-white transition-opacity hover:opacity-90"
-              >
-                Order now
-              </a>
-            </div>
-          </div>
+
+
         </section>
 
-        {/* Rewards promo */}
-        <section id="rewards" className="border-b border-border bg-white text-[#4D2312]">
-          <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-center gap-x-6 gap-y-4 px-4 py-5 text-center md:flex-row md:text-left">
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <div className="flex h-12 w-20 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-transparent text-[8px] text-muted-foreground border border-dashed border-[#4D2312]/30">
-                Badge Image
+        {/* Floating Rewards Drawer */}
+        <div className="fixed bottom-24 right-0 z-50 flex items-center">
+          {/* Bouncing arrow tab */}
+          <button
+            onClick={() => setRewardsOpen(o => !o)}
+            className="flex flex-col items-center justify-center bg-[#4D2312] text-white rounded-l-xl px-2 py-4 shadow-lg hover:bg-[#E33423] transition-colors group"
+            aria-label="Toggle rewards"
+          >
+            <svg
+              className={`w-4 h-4 transition-transform duration-500 animate-bounce ${
+                rewardsOpen ? 'rotate-0' : '-rotate-180'
+              }`}
+              fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Expandable card */}
+          <div
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${
+              rewardsOpen ? 'max-w-[280px] opacity-100' : 'max-w-0 opacity-0'
+            }`}
+          >
+            <div className="bg-white border-y border-l border-[#4D2312]/15 rounded-l-2xl shadow-xl px-5 py-4 flex flex-col gap-3 w-[260px]">
+              <div className="flex items-center gap-3">
+                <p className="text-[12px] font-bold uppercase tracking-[0.06em] text-[#4D2312] leading-snug">
+                  Earn points, badges &amp; free entrees
+                </p>
               </div>
-              <h2 className="text-[15px] sm:text-[17px] font-bold uppercase tracking-[0.08em]">
-                Earn extra points, extra badges, & extra entrees
-              </h2>
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href="#menu"
-                className="inline-flex items-center rounded-sm bg-[#4D2312] px-6 py-3 text-xs font-bold uppercase tracking-[0.16em] text-white transition-opacity hover:opacity-90"
-              >
-                Join rewards
-              </a>
-              <span className="text-[13px] font-medium uppercase tracking-[0.12em]">
-                or <a href="#menu" className="font-bold text-[#C29022] underline underline-offset-4 hover:text-[#a0761c]">Sign in</a>
-              </span>
+              <div className="flex items-center gap-2">
+                <a
+                  href="#menu"
+                  className="inline-flex items-center rounded-full bg-[#4D2312] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white hover:opacity-90 transition-opacity"
+                >
+                  Join rewards
+                </a>
+                <span className="text-[11px] font-medium text-[#4D2312]/60 uppercase tracking-wide">
+                  or <a href="#menu" className="font-bold text-[#C29022] underline underline-offset-2 hover:text-[#a0761c]">Sign in</a>
+                </span>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
 
         {/* Meal types grid */}
         <div className="relative w-full overflow-hidden">
-          <section id="menu" className="relative z-10 mx-auto max-w-[1400px] px-4 py-16 sm:py-20">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="display-xl text-3xl sm:text-4xl">Order your way</h2>
+          <section id="menu" className="relative z-10 mx-auto max-w-[1400px] px-4 pt-8 pb-16 sm:pt-12 sm:pb-20">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center sm:items-end justify-center sm:justify-between gap-4 text-center sm:text-left w-full">
+              <div className="w-full sm:w-auto">
+                <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E33423] mb-2">What's your craving?</p>
+                <h2 className="display-xl text-3xl sm:text-4xl text-[#4D2312]">Order your way</h2>
+              </div>
               <a
-              href="#menu"
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-brick"
-            >
-              Full menu <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
+                href="#menu"
+                className="hidden sm:inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-[#4D2312] hover:text-[#E33423] transition-colors"
+              >
+                Full menu <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 sm:gap-y-16">
+          <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-16 lg:grid-cols-3">
             {mealTypes.map((meal, index) => (
-              <a href="#menu" key={meal.name} className="group flex flex-row items-center sm:flex-col sm:text-center text-left gap-4 sm:gap-0">
-                <div className="relative flex w-1/2 sm:w-full justify-center transition-all duration-300 ease-out group-hover:-translate-y-4 group-hover:scale-110 group-hover:-rotate-2 group-active:scale-95">
+              <Link to="/menu/$categoryId" params={{ categoryId: meal.name.toLowerCase().replace(/ /g, '-') }} key={meal.name} className="group flex flex-col items-center text-center gap-0">
+                <div className="relative flex w-full justify-center transition-all duration-300 ease-out group-hover:-translate-y-4 group-hover:scale-110 group-hover:-rotate-2 group-active:scale-95">
                   <div 
                     className="animate-float aspect-[4/3] w-full max-w-[320px] rounded-sm bg-transparent border-0 flex items-center justify-center drop-shadow-md transition-all duration-300 group-hover:drop-shadow-2xl"
                     style={{ animationDelay: `${index * 0.15}s` }}
@@ -200,27 +186,27 @@ function Index() {
                   </div>
                 </div>
                 
-                <div className="flex w-1/2 sm:w-full min-h-[80px] flex-col items-start sm:items-center justify-center sm:justify-start sm:mt-2">
+                <div className="flex w-full min-h-[80px] flex-col items-center justify-start mt-2">
                   {meal.tag && (
                     <span className="mb-1 rounded-full bg-[#4D2312] px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
                       {meal.tag}
                     </span>
                   )}
                   
-                  <h3 className={`display-xl text-2xl font-bold uppercase tracking-normal text-[#4D2312] sm:text-[26px] lg:text-[32px] ${!meal.tag ? 'sm:mt-5' : 'mt-1'}`}>{meal.name}</h3>
+                  <h3 className={`display-xl text-lg sm:text-[26px] lg:text-[32px] font-bold uppercase tracking-normal text-[#4D2312] ${!meal.tag ? 'mt-3 sm:mt-5' : 'mt-1'}`}>{meal.name}</h3>
                   
                   {meal.note && (
                     <p className="mt-1 text-xs font-medium text-[#4D2312]">{meal.note}</p>
                   )}
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
         </div>
 
         {/* Feature split */}
-        <section ref={sectionRef} className="bg-white overflow-hidden">
+        <section ref={sectionRef} className="overflow-hidden">
           <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2 relative">
             <img 
               ref={pizzaRef}
@@ -247,17 +233,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Promises */}
-        <section className="mx-auto max-w-[1400px] px-4 py-16 sm:py-20">
-          <div className="grid gap-8 md:grid-cols-3">
-            {promises.map(({ title, copy }) => (
-              <div key={title} className="pt-2">
-                <h3 className="display-xl text-2xl">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{copy}</p>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* Dan Brew Section */}
         <section className="relative w-full py-16 sm:py-24 mt-48 sm:mt-64 mb-72 sm:mb-96 flex flex-col justify-center items-center text-center">
@@ -279,12 +254,19 @@ function Index() {
             <h2 className="display-xl text-[clamp(4rem,10vw,8rem)] text-[#4D2312] uppercase tracking-tight z-20 relative">
               DANBREW
             </h2>
+            <Link
+              to="/menu/$categoryId"
+              params={{ categoryId: "danbrew" }}
+              className="mt-6 inline-flex items-center gap-2 text-[#4D2312] font-black uppercase tracking-[0.15em] text-sm border-b-2 border-[#4D2312] pb-0.5 hover:text-[#E33423] hover:border-[#E33423] transition-colors z-20 relative"
+            >
+              Explore More <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
 
 
         {/* App promo */}
-        <section className="bg-white text-[#4D2312] overflow-hidden">
+        <section className="text-[#4D2312] overflow-hidden">
           <div className="mx-auto grid max-w-[1400px] items-end gap-10 pt-16 pb-0 sm:pt-20 sm:pb-0 lg:grid-cols-2">
             <div className="px-4 sm:px-8 pb-16 sm:pb-20 order-2 lg:order-1">
               <p className="text-[13px] font-bold uppercase tracking-[0.3em] text-brick">
@@ -337,116 +319,6 @@ function Index() {
           </div>
         </section>
 
-        {false && (
-          <>
-        {/* Locations Overhaul */}
-        <section id="locations" className="relative bg-[#F9F4EB] py-16 sm:py-32 overflow-hidden text-[#5A1921] min-h-screen">
-          {/* Decorative bushes */}
-          <img src="/danbro/find/bushes.png" alt="Bushes" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[250%] max-w-none md:w-full md:left-0 md:translate-x-0 h-auto object-cover object-bottom pointer-events-none z-0 opacity-100" />
-
-          {/* Sign placeholder */}
-          <img src="/danbro/sign-mockup.png" alt="" className="absolute top-[50%] left-0 w-32 object-contain z-30" />
-
-          <div className="relative mx-auto max-w-[1400px] px-4 lg:px-8 z-10 flex flex-col items-center">
-            {/* Top section: Text + Search and Path Illustration */}
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-10 w-full relative">
-              
-              {/* Left Content */}
-              <div className="max-w-2xl pt-10 z-10 relative w-full">
-                <h2 className="display-xl text-[#5A1921] text-[clamp(4rem,8vw,7rem)] leading-[0.85] tracking-tight relative inline-block">
-                  FIND YOUR<br />DANBRO.
-                  {/* Decorative Heart */}
-                  <span className="absolute -top-4 sm:-top-8 left-[12%] sm:left-[15%] text-[#5A1921] text-3xl sm:text-5xl">♥</span>
-                </h2>
-                <p className="mt-6 sm:mt-8 text-base sm:text-xl font-bold text-[#5A1921]/80 max-w-md pr-4 sm:pr-0">
-                  Fresh cakes, coffee & everything worth stopping for — just around the corner.
-                </p>
-                
-                {/* Search Bar */}
-                <div className="mt-8 sm:mt-10 bg-white rounded-full p-1 sm:p-2 pl-4 sm:pl-6 flex items-center shadow-lg shadow-[#5A1921]/10 border border-[#E8DDC3] w-full max-w-xl overflow-hidden">
-                  <div className="pr-2 sm:pr-4 text-[#5A1921] shrink-0">
-                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Enter your location"
-                    className="flex-1 bg-transparent outline-none text-[#5A1921] placeholder-[#5A1921]/50 font-bold text-sm sm:text-lg min-w-0 w-full"
-                  />
-                  <button className="bg-[#5A1921] hover:bg-[#4a141b] text-white rounded-full px-4 sm:px-8 py-3 sm:py-4 font-bold text-[10px] sm:text-sm tracking-wider sm:tracking-widest transition-colors flex items-center gap-1 sm:gap-2 whitespace-nowrap shrink-0">
-                    FIND A STORE <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Right Content - Path Illustration */}
-              <div className="relative w-full lg:w-[60%] lg:absolute lg:right-[10%] lg:top-[-10%] aspect-square lg:aspect-auto h-full pointer-events-none z-0">
-                <img src="/danbro/find/store.png" alt="Danbro Store Map Illustration" className="w-full h-full object-contain object-right-top" />
-              </div>
-            </div>
-
-            {/* Bottom Ticket Container */}
-            <div className="mt-16 lg:mt-32 relative bg-white rounded-[2rem] shadow-2xl border border-[#EAE2CE] p-8 lg:p-10 z-10 w-full max-w-[1200px]">
-              {/* Fake dashed edge effect */}
-              <div className="absolute top-0 left-4 right-4 h-px border-t-[3px] border-dashed border-[#EAE2CE]" />
-
-              <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 mt-4">
-                
-                {/* Column 1 */}
-                <div className="flex flex-col gap-6">
-                  <h3 className="text-xl sm:text-2xl font-black text-[#5A1921] tracking-wide uppercase relative inline-block self-start">
-                    D<span className="relative inline-block"><span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs">♥</span>A</span>NBRO NEAR YOU
-                  </h3>
-                  <div className="relative mt-2">
-                    <input type="text" defaultValue="Delhi" className="w-full bg-[#F2EBDC] rounded-xl px-5 py-4 text-[#5A1921] font-bold border border-[#E8DDC3] outline-none pr-12" />
-                    <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5A1921]/50 hover:text-[#5A1921]">
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-                  <button className="flex items-center gap-2 text-sm font-bold text-[#5A1921]/70 hover:text-[#5A1921]">
-                    <Navigation className="w-4 h-4" /> Use my current location
-                  </button>
-                </div>
-
-                {/* Column 2 - Locations List */}
-                <div className="flex flex-col gap-3">
-                  <div className="bg-[#5A1921] text-white rounded-2xl p-5 flex justify-between items-center cursor-pointer shadow-md transform transition hover:scale-[1.02]">
-                    <div>
-                      <h4 className="font-bold flex items-center gap-2 text-sm sm:text-base"><MapPin className="w-4 h-4 shrink-0" /> DANBRO — Connaught Place</h4>
-                      <p className="text-xs sm:text-sm text-white/80 mt-1 ml-6">1.2 km away</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 shrink-0 ml-2" />
-                  </div>
-                  
-                  <div className="bg-[#F2EBDC] text-[#5A1921] rounded-2xl p-5 flex justify-between items-center cursor-pointer transition hover:bg-[#E8DDC3]">
-                    <div>
-                      <h4 className="font-bold flex items-center gap-2 text-sm sm:text-base"><MapPin className="w-4 h-4 text-[#5A1921]/50 shrink-0" /> DANBRO — Saket</h4>
-                      <p className="text-xs sm:text-sm text-[#5A1921]/60 mt-1 ml-6">4.8 km away</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 shrink-0 ml-2 text-[#5A1921]/30" />
-                  </div>
-
-                  <div className="bg-[#F2EBDC] text-[#5A1921] rounded-2xl p-5 flex justify-between items-center cursor-pointer transition hover:bg-[#E8DDC3]">
-                    <div>
-                      <h4 className="font-bold flex items-center gap-2 text-sm sm:text-base"><MapPin className="w-4 h-4 text-[#5A1921]/50 shrink-0" /> DANBRO — Vasant Kunj</h4>
-                      <p className="text-xs sm:text-sm text-[#5A1921]/60 mt-1 ml-6">7.1 km away</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 shrink-0 ml-2 text-[#5A1921]/30" />
-                  </div>
-                </div>
-
-                {/* Column 3 - Map */}
-                <div className="relative aspect-[4/3] lg:aspect-auto rounded-2xl overflow-visible lg:overflow-hidden border-4 border-[#F2EBDC] shadow-inner bg-[#EAE2CE]">
-                  <img src="/danbro/find/map.png" alt="Map" className="w-full h-full object-cover rounded-xl" />
-                  {/* Sticky note placeholder */}
-                  <img src="/danbro/sticky-note.png" alt="Sticky Note" className="absolute -right-4 lg:-right-8 top-[10%] lg:top-[20%] w-24 sm:w-32 object-contain drop-shadow-lg rotate-6 z-20" />
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </section>
-        </>
-        )}
       </main>
 
       {false && <Footer />}

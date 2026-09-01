@@ -267,6 +267,19 @@
   animation: slide-x 4s ease-in-out infinite;
 }
 
+@keyframes slide-peel {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(8%);
+  }
+}
+
+@utility animate-slide-peel {
+  animation: slide-peel 4s ease-in-out infinite;
+}
+
 html, body {
   overflow-x: hidden;
   width: 100%;

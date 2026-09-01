@@ -1,59 +1,52 @@
-import { Menu, MapPin, User, ShoppingBag } from "lucide-react";
-
-const navLinks = [
-  { name: "Menu", active: true },
-  { name: "Catering", active: false },
-  { name: "Rewards", active: false },
-  { name: "Our Values", active: false },
-  { name: "Nutrition", active: false }
-];
+import { Menu, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white">
+    <header className="absolute top-0 w-full z-50 bg-transparent text-white">
+      <div className="mx-auto flex h-[80px] w-full items-center justify-between px-6 lg:px-10 relative">
+        {/* Mobile menu button */}
+        <button
+          aria-label="Open menu"
+          className="flex h-10 w-10 items-center justify-center rounded-sm transition-colors lg:hidden"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
 
+        {/* Left Nav */}
+        <nav className="hidden lg:flex items-center gap-8 flex-1">
+          <a href="#menu" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">Menu</a>
+          <a href="#real-deal" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">Real Deal</a>
+          <a href="#loyalty" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">Loyalty</a>
+          <a href="#catering" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">Catering</a>
+        </nav>
 
-      <div className="border-b border-[#E1E1E1]">
-        <div className="mx-auto flex h-[76px] max-w-[1400px] items-center gap-4 sm:gap-8 px-4">
-          <button
-            aria-label="Open menu"
-            className="flex h-10 w-10 items-center justify-center rounded-sm text-[#4D2312] transition-colors hover:bg-secondary lg:hidden"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
+        {/* Center Logo */}
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 flex justify-center z-50">
+          <Link to="/" className="flex items-center p-1.5 mt-2 transition-transform hover:scale-105">
+            <img src="/danbro/logo.png" alt="Danbro Logo" className="h-[65px] w-[65px] sm:h-[75px] sm:w-[75px] object-contain brightness-0 invert" />
+          </Link>
+        </div>
 
-          <a href="/danbro/" className="flex items-center shrink-0">
-            <img src="/danbro/logo.png" alt="Danbro Logo" className="h-[100px] w-[100px] sm:h-[120px] sm:w-[120px] object-contain rounded-full" />
-          </a>
-
-          <nav className="hidden h-full items-center gap-7 lg:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href="#menu"
-                className={`relative flex h-full items-center pt-1 text-[17px] font-bold uppercase tracking-[0.02em] transition-colors hover:text-[#93281E] ${
-                  link.active ? "text-[#93281E]" : "text-[#4D2312]"
-                }`}
-              >
-                {link.name}
-                {link.active && (
-                  <span className="absolute bottom-0 left-0 h-[4px] w-full bg-[#93281E]"></span>
-                )}
-              </a>
-            ))}
+        {/* Right Nav */}
+        <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
+          <nav className="flex items-center gap-8">
+            <a href="#about-us" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">About Us</a>
+            <a href="#careers" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">Careers</a>
+            <Link to="/locations" className="text-[14px] font-extrabold uppercase tracking-wide hover:text-[#E84E20] transition-colors">Locations</Link>
           </nav>
-
-          <div className="ml-auto flex items-center gap-4 sm:gap-6 md:gap-8 text-[#4D2312]">
-            <a href="#locations" className="hidden items-center gap-2 text-[14px] font-bold uppercase tracking-[0.06em] hover:text-[#93281E] transition-colors md:flex">
-              <MapPin className="h-5 w-5" strokeWidth={2.5} /> Find a DANBRO
-            </a>
-            <a href="#signin" className="flex items-center gap-2 text-[14px] font-bold uppercase tracking-[0.06em] hover:text-[#93281E] transition-colors">
-              <User className="h-5 w-5" strokeWidth={2.5} />
-              <span className="hidden sm:inline">Sign In / Join</span>
-            </a>
-            <a href="#cart" className="flex items-center hover:text-[#93281E] transition-colors">
-              <ShoppingBag className="h-[22px] w-[22px]" strokeWidth={2} />
-            </a>
+          
+          <div className="flex items-center gap-4">
+            <button className="flex items-center gap-2 bg-[#E84E20] hover:bg-[#d6451a] text-white px-6 py-2.5 rounded-full font-bold text-[14px] uppercase tracking-wide transition-colors">
+              <ArrowRight className="w-4 h-4" /> Order
+            </button>
+            <button className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden border-2 border-[#E84E20]/20 shadow-sm transition-transform hover:scale-105">
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" 
+                alt="Indian Flag" 
+                className="w-full h-full object-cover" 
+              />
+            </button>
           </div>
         </div>
       </div>

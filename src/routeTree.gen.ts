@@ -10,33 +10,68 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocationsRouteImport } from './routes/locations'
+import { Route as MenuCategoryIdRouteImport } from './routes/menu/$categoryId'
+import { Route as MenuCategoryIdProductIdRouteImport } from './routes/menu/$categoryId/$productId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocationsRoute = LocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuCategoryIdRoute = MenuCategoryIdRouteImport.update({
+  id: '/menu/$categoryId',
+  path: '/menu/$categoryId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuCategoryIdProductIdRoute = MenuCategoryIdProductIdRouteImport.update({
+  id: '/$productId',
+  path: '/$productId',
+  getParentRoute: () => MenuCategoryIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/locations': typeof LocationsRoute
+  '/menu/$categoryId': typeof MenuCategoryIdRouteWithChildren
+  '/menu/$categoryId/$productId': typeof MenuCategoryIdProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/locations': typeof LocationsRoute
+  '/menu/$categoryId': typeof MenuCategoryIdRouteWithChildren
+  '/menu/$categoryId/$productId': typeof MenuCategoryIdProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/locations': typeof LocationsRoute
+  '/menu/$categoryId': typeof MenuCategoryIdRouteWithChildren
+  '/menu/$categoryId/$productId': typeof MenuCategoryIdProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/locations' | '/menu/$categoryId' | '/menu/$categoryId/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/locations' | '/menu/$categoryId' | '/menu/$categoryId/$productId'
+  id:
+    | '__root__'
+    | '/'
+    | '/locations'
+    | '/menu/$categoryId'
+    | '/menu/$categoryId/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LocationsRoute: typeof LocationsRoute
+  MenuCategoryIdRoute: typeof MenuCategoryIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +83,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/locations': {
+      id: '/locations'
+      path: '/locations'
+      fullPath: '/locations'
+      preLoaderRoute: typeof LocationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu/$categoryId': {
+      id: '/menu/$categoryId'
+      path: '/menu/$categoryId'
+      fullPath: '/menu/$categoryId'
+      preLoaderRoute: typeof MenuCategoryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu/$categoryId/$productId': {
+      id: '/menu/$categoryId/$productId'
+      path: '/$productId'
+      fullPath: '/menu/$categoryId/$productId'
+      preLoaderRoute: typeof MenuCategoryIdProductIdRouteImport
+      parentRoute: typeof MenuCategoryIdRoute
+    }
   }
 }
 
+interface MenuCategoryIdRouteChildren {
+  MenuCategoryIdProductIdRoute: typeof MenuCategoryIdProductIdRoute
+}
+
+const MenuCategoryIdRouteChildren: MenuCategoryIdRouteChildren = {
+  MenuCategoryIdProductIdRoute: MenuCategoryIdProductIdRoute,
+}
+
+const MenuCategoryIdRouteWithChildren = MenuCategoryIdRoute._addFileChildren(
+  MenuCategoryIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LocationsRoute: LocationsRoute,
+  MenuCategoryIdRoute: MenuCategoryIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
